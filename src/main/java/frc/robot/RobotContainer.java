@@ -53,6 +53,9 @@ public class RobotContainer {
   // The driver's controller
   XboxController m_driverController = new XboxController(OIConstants.kDriverControllerPort);
 
+  // The sendableChooser for auto selection
+  private final SendableChooser<Command> autoChooser;
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -60,8 +63,12 @@ public class RobotContainer {
     
 
     ShuffleboardTab teleOpTab = Shuffleboard.getTab("TeleOp");
+    
     teleOpTab.addDouble("Gyro", m_robotDrive::getHeading);
 
+    autoChooser = AutoBuilder.buildAutoChooser();
+
+    //autoChooser.addOption("Test Auto", getAuto());
     
     // Configure the button bindings
     configureButtonBindings();
@@ -100,6 +107,19 @@ public class RobotContainer {
             m_robotDrive));
           
   }
+  /*
+  public Command getAuto(){
+    try
+    {
+        return new PathPlannerAuto("Test Auto");
+    }
+    catch(Exception ex)
+    {
+        throw new Exception("error");
+        
+
+    } 
+} */
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
