@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.HashMap;
+
 import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
@@ -23,6 +25,7 @@ import edu.wpi.first.util.WPIUtilJNI;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.utils.SwerveUtils;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class DriveSubsystem extends SubsystemBase {
@@ -73,21 +76,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   /** Creates a new DriveSubsystem. */
   public DriveSubsystem() {
-
-    AutoBuilder.configureHolonomic(
-      this::getPose,
-      this::resetOdometry,
-      this::getRobotRelativeSpeeds,
-      this::driveRobotRelative,
-      new HolonomicPathFollowerConfig(
-        new PIDConstants(AutoConstants.kPXController,0,0),
-        new PIDConstants(AutoConstants.kPThetaController,0,0),
-        4.8, // max speed in m/s
-        Units.inchesToMeters(Math.sqrt(Math.pow(28.5, 2)+Math.pow(18.5,2))/2), // Radius in meters of 28.5 x 18.5 inch robot using a^2 +b^2 = c^2
-        new ReplanningConfig()
-      ),
-      this
-    );
+    
   }
 
   @Override
